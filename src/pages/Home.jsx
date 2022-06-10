@@ -65,6 +65,7 @@ const Home = () => {
     <>
       <Flex py={8} px={20}>
         <Button
+          w={["100%", "inherit"]}
           onClick={async () => {
             setFilter(!filter);
           }}
