@@ -1,6 +1,12 @@
 ## 📋 Desafio Técnico ACME
 
-Este é um trabalho feito como desafio técnico de Front-end para a Hype.
+🔗 https://desafio-acme-flp.netlify.app/
+
+Este é um trabalho feito como desafio técnico de Front-end para a [Hype](https://hypeempreendimentos.com.br/).
+
+O desafio consiste em um aplicativo web simples para exibir os produtos da empresa fictícia Acme Inc. aos seus usuários. O aplicativo exibe 15 itens, de maneira responsiva, com imagens, descrições e valores gerados aleatoriamente a partir de bases de dados internas ou a partir de APIs.
+
+Possui filtragem por favoritos e por nome do item.
 
 ## Instalação
 
@@ -14,5 +20,3 @@ No diretório do projeto instale as dependências com:
 3. Rode o projeto em modo desenvolvimento
    - `npm start`
 4. Abra [http://localhost:3000](http://localhost:3000) para ver o projeto no navegador.
-
-🔗 https://desafio-acme-flp.netlify.app/
