@@ -3,13 +3,25 @@ import { useEffect, useState } from "react";
 import { loremHipsum } from "../Api";
 import Card from "../components/Card";
 import { BsStarFill } from "react-icons/bs";
-import { Button, Flex, Icon, SimpleGrid } from "@chakra-ui/react";
+import { BiSearchAlt } from "react-icons/bi";
+import {
+  Button,
+  Flex,
+  Icon,
+  SimpleGrid,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
   const [filter, setFilter] = useState(false);
-  const [favoriteSet, setFavoriteSet] = useState(new Set());
   const [cartSet, setCartSet] = useState(new Set());
+  const [products, setProducts] = useState([]);
+  const [favoriteSet, setFavoriteSet] = useState(new Set());
+
+  const handleChange = (event) => setSearch(event.target.value);
 
   // * Set - produtos favoritos e produtos no carrinho
   const loadFavAndCart = () => {
@@ -63,50 +75,83 @@ const Home = () => {
 
   return (
     <>
-      <Flex py={8} px={20}>
-        <Button
-          w={["100%", "inherit"]}
-          onClick={async () => {
-            setFilter(!filter);
-          }}
-          colorScheme={"yellow"}
-          variant={filter ? "ghost" : "solid"}
+      <Flex maxW={"1092px"} direction={"column"} m={"auto"}>
+        <Flex
+          maxW={"1092px"}
+          justifyContent={"space-between"}
+          px={20}
+          py={8}
+          direction={["column", "row"]}
         >
-          Favoritos
-          <Icon
-            ml={2}
-            as={BsStarFill}
-            alignSelf={"center"}
-            color={filter ? "yellow.500" : "white"}
-            h={4}
-            w={4}
-          />
-        </Button>
+          <Button
+            w={["100%", "140px"]}
+            onClick={async () => {
+              setFilter(!filter);
+            }}
+            colorScheme={"yellow"}
+            variant={filter ? "ghost" : "solid"}
+          >
+            Favoritos
+            <Icon
+              ml={2}
+              as={BsStarFill}
+              alignSelf={"center"}
+              color={filter ? "yellow.500" : "white"}
+              h={4}
+              w={4}
+            />
+          </Button>
+          <InputGroup size="md" w={["100%", "200px"]} mt={[4, 0]}>
+            <Input
+              pr="1.5rem"
+              type={"text"}
+              placeholder="Busque por nome..."
+              onChange={handleChange}
+            />
+            <InputRightElement width="2rem">
+              {" "}
+              <BiSearchAlt />
+            </InputRightElement>
+          </InputGroup>
+        </Flex>
+        <SimpleGrid
+          columns={[null, 1, 2, 3]}
+          spacing="60px"
+          p={20}
+          pt={0}
+          justifyContent={"center"}
+        >
+          {products
+            .filter((val) => {
+              if (search === "") {
+                return val;
+              } else if (
+                val.nome.toLowerCase().includes(search.toLocaleLowerCase())
+              ) {
+                return val;
+              }
+              return null;
+            })
+            .map((prod, idx) => {
+              if (favoriteSet.has(idx) || !filter) {
+                return (
+                  <Card
+                    key={idx}
+                    seed={prod.seed}
+                    favorito={favoriteSet.has(idx)}
+                    carrinho={cartSet.has(idx)}
+                    nome={prod.nome}
+                    valor={prod.valor}
+                    desc={prod.desc}
+                    update={loadFavAndCart}
+                    idx={idx.toString()}
+                  />
+                );
+              }
+              return null;
+            })}
+        </SimpleGrid>
       </Flex>
-      <SimpleGrid
-        columns={[null, 1, 2, 3]}
-        spacing="40px"
-        p={"20"}
-        pt={0}
-        justifyContent={"center"}
-      >
-        {products.map((prod, idx) => (
-          // <Box display={filter ? (favoriteSet.has(idx) ? "flex" : "none") : "flex"} >
-          // <Flex alignContent={"center"} direction={"column"}>
-          <Card
-            key={idx}
-            seed={prod.seed}
-            favorito={favoriteSet.has(idx)}
-            carrinho={cartSet.has(idx)}
-            nome={prod.nome}
-            valor={prod.valor}
-            desc={prod.desc}
-            idx={idx.toString()}
-            filter={filter}
-          />
-          // </Flex>
-        ))}
-      </SimpleGrid>
     </>
   );
 };

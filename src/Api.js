@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const hipsum = axios.create({
-	baseURL: "http://hipsum.co/api",
+	baseURL: "https://hipsum.co/api",
 })
 
 export const loremHipsum = async () => {

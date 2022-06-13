@@ -78,7 +78,6 @@ const Cart = () => {
             {/* Mapeamento - Inicio */}
             {products.map((prod, idx) => (
               <Flex key={idx} display={cartSet.has(idx) ? "flex" : "none"}>
-                {/* <Flex key={idx} display={cartSet.has(idx) ? "flex" : "none"}> */}
                 <RouteLink to={1}>
                   <Image
                     src={"https://picsum.photos/seed/" + prod.seed + "/382/300"}
@@ -95,7 +94,7 @@ const Cart = () => {
                   w="100%"
                 >
                   <Flex
-                    fontSize={"2xl"}
+                    fontSize={["md", "lg", "xl"]}
                     fontWeight="semibold"
                     as="h4"
                     alignContent="center"
@@ -146,9 +145,15 @@ const Cart = () => {
             w={["100%", "100%", "65%"]}
           >
             <Flex justify={"space-between"}>
-              <Text fontSize={"2xl"} fontWeight="semibold" as="h4">
-                Valor total
-              </Text>
+              <Center>
+                <Text
+                  fontSize={["lg", "xl", "2xl"]}
+                  fontWeight="semibold"
+                  as="h4"
+                >
+                  Valor total
+                </Text>
+              </Center>
               <Box
                 fontSize={["xl", "2xl"]}
                 color={"gray.800"}

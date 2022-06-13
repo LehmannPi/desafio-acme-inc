@@ -6,7 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import { Link as RouteLink } from "react-router-dom";
 
 function ProductAddToCart(props) {
-  const { seed, favorito, carrinho, nome, valor, desc, idx, filter } = props;
+  const { seed, favorito, carrinho, nome, valor, desc, idx, update } = props;
   const [favorite, setFavorite] = useState(favorito);
   const [cart, setCart] = useState(carrinho);
 
@@ -16,7 +16,7 @@ function ProductAddToCart(props) {
     var favoriteSet = new Set(JSON.parse(localStorage.getItem("favoritos")));
     favoriteSet.has(key) ? favoriteSet.delete(key) : favoriteSet.add(key);
     localStorage.setItem("favoritos", JSON.stringify([...favoriteSet]));
-    console.log(favoriteSet);
+    update();
   };
   const handleCarrinho = () => {
     const key = parseInt(idx);
@@ -24,11 +24,10 @@ function ProductAddToCart(props) {
     var cartSet = new Set(JSON.parse(localStorage.getItem("carrinho")));
     cartSet.has(key) ? cartSet.delete(key) : cartSet.add(key);
     localStorage.setItem("carrinho", JSON.stringify([...cartSet]));
-    console.log(cartSet);
   };
 
   return (
-    <Flex display={filter && !favorite ? "none" : "flex"} justifyContent={"center"}>
+    <Flex display={"flex"} justifyContent={"center"}>
       <Box
         maxW="sm"
         borderWidth="1px"
