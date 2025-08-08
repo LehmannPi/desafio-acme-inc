@@ -1,0 +1,5 @@
+name = "acme-static"
+compatibility_date = "2025-08-08"
+
+[site]
+bucket = "./build"
