@@ -1,9 +1,9 @@
-import { Flex, Box, Image, Icon, Tooltip, Text } from "@chakra-ui/react";
-import { useState } from "react";
-import { BsStar, BsStarFill } from "react-icons/bs";
-import { FiShoppingCart } from "react-icons/fi";
-import { IoMdClose } from "react-icons/io";
-import { Link as RouteLink } from "react-router-dom";
+import { Flex, Box, Image, Icon, Tooltip, Text } from '@chakra-ui/react';
+import { useState } from 'react';
+import { BsStar, BsStarFill } from 'react-icons/bs';
+import { FiShoppingCart } from 'react-icons/fi';
+import { IoMdClose } from 'react-icons/io';
+import { Link as RouteLink } from 'react-router-dom';
 
 function ProductAddToCart(props) {
   const { seed, favorito, carrinho, nome, valor, desc, idx, update } = props;
@@ -13,21 +13,21 @@ function ProductAddToCart(props) {
   const handleFavorito = () => {
     const key = parseInt(idx);
     setFavorite(!favorite);
-    var favoriteSet = new Set(JSON.parse(localStorage.getItem("favoritos")));
+    var favoriteSet = new Set(JSON.parse(localStorage.getItem('favoritos')));
     favoriteSet.has(key) ? favoriteSet.delete(key) : favoriteSet.add(key);
-    localStorage.setItem("favoritos", JSON.stringify([...favoriteSet]));
+    localStorage.setItem('favoritos', JSON.stringify([...favoriteSet]));
     update();
   };
   const handleCarrinho = () => {
     const key = parseInt(idx);
     setCart(!cart);
-    var cartSet = new Set(JSON.parse(localStorage.getItem("carrinho")));
+    var cartSet = new Set(JSON.parse(localStorage.getItem('carrinho')));
     cartSet.has(key) ? cartSet.delete(key) : cartSet.add(key);
-    localStorage.setItem("carrinho", JSON.stringify([...cartSet]));
+    localStorage.setItem('carrinho', JSON.stringify([...cartSet]));
   };
 
   return (
-    <Flex display={"flex"} justifyContent={"center"}>
+    <Flex display={'flex'} justifyContent={'center'}>
       <Box
         maxW="sm"
         borderWidth="1px"
@@ -36,19 +36,19 @@ function ProductAddToCart(props) {
         position="relative"
       >
         <Tooltip
-          label={`${favorite ? "Remover d" : "Adicionar a"}os Favoritos`}
+          label={`${favorite ? 'Remover d' : 'Adicionar a'}os Favoritos`}
           bg="white"
-          placement={"top"}
-          color={"gray.800"}
-          fontSize={"1.2em"}
+          placement={'top'}
+          color={'gray.800'}
+          fontSize={'1.2em'}
         >
           <Flex top={3} right={3} position="absolute">
             <Icon
               as={favorite ? BsStarFill : BsStar}
-              alignSelf={"center"}
+              alignSelf={'center'}
               onClick={handleFavorito}
               cursor="pointer"
-              color={"yellow.500"}
+              color={'yellow.500'}
               h={6}
               w={6}
             />
@@ -56,7 +56,7 @@ function ProductAddToCart(props) {
         </Tooltip>
         <RouteLink to={idx}>
           <Image
-            src={"https://picsum.photos/seed/" + seed + "/382/300"}
+            src={'https://picsum.photos/seed/' + seed + '/382/300'}
             alt={`Imagem de ${nome}`}
             roundedTop="lg"
           />
@@ -65,7 +65,7 @@ function ProductAddToCart(props) {
         <Box p="6">
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Flex
-              fontSize={["lg", "xl", "2xl"]}
+              fontSize={['lg', 'xl', '2xl']}
               fontWeight="semibold"
               as="h4"
               alignContent="center"
@@ -73,16 +73,16 @@ function ProductAddToCart(props) {
               <RouteLink to={idx}>{nome}</RouteLink>
             </Flex>
             <Tooltip
-              label={`${cart ? "Remover d" : "Adicionar a"}o carrinho`}
+              label={`${cart ? 'Remover d' : 'Adicionar a'}o carrinho`}
               bg="white"
-              placement={"top"}
-              color={"gray.800"}
-              fontSize={"1.2em"}
+              placement={'top'}
+              color={'gray.800'}
+              fontSize={'1.2em'}
             >
               <Flex>
                 <Icon
                   as={cart ? IoMdClose : FiShoppingCart}
-                  alignSelf={"center"}
+                  alignSelf={'center'}
                   onClick={handleCarrinho}
                   cursor="pointer"
                   h={6}
@@ -96,27 +96,27 @@ function ProductAddToCart(props) {
             justifyContent="space-between"
             alignContent="center"
             mt={2}
-            position={"relative"}
+            position={'relative'}
           >
             <Text
               noOfLines={[1, 2]}
-              fontSize={["sm", "md"]}
-              width={["70%", "60%"]}
-              textAlign={"left"}
+              fontSize={['sm', 'md']}
+              width={['70%', '60%']}
+              textAlign={'left'}
             >
               {desc}
             </Text>
             <Box
-              fontSize={["lg", "xl"]}
-              color={"gray.800"}
-              position={"absolute"}
+              fontSize={['lg', 'xl']}
+              color={'gray.800'}
+              position={'absolute'}
               bottom={0}
               right={0}
             >
-              <Box as="span" color={"gray.600"} fontSize="md">
+              <Box as="span" color={'gray.600'} fontSize="md">
                 R$
               </Box>
-              {valor.toFixed(2)}
+              {typeof valor === 'number' ? valor.toFixed(2) : '--'}
             </Box>
           </Flex>
         </Box>

@@ -30,7 +30,8 @@ const Cart = () => {
       sum += products[key].valor;
     }
     setTotal(sum);
-  }, [cartSet, products]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartSet]);
 
   useEffect(() => {
     (async () => {
